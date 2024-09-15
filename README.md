@@ -4,7 +4,7 @@
 
 ## Project Overview
 
-This project aims to create an AI-driven test automation framework using Playwright, with integration of AI to optimize and enhance the quality assurance process. The framework will automatically generate and execute tests based on observed changes in the application code, provide insights, and streamline the testing process to speed up development cycles.
+This project aims to create an AI-driven test automation framework using Playwright, with integration of AI to optimize and enhance the quality assurance process. The framework will automatically generate and execute tests based on observed changes in added features, provide insights, and streamline the testing process to speed up development cycles.
 
 The project will:
 1. Find and train an AI model to assist in building and running test cases.
