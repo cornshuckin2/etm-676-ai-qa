@@ -7,6 +7,7 @@
 This project aims to create an AI-driven test automation framework using Playwright, with integration of AI to optimize and enhance the quality assurance process. The framework will automatically generate and execute tests based on observed changes in added features, provide insights, and streamline the testing process to speed up development cycles.
 
 The project will:
+
 1. Find and train an AI model to assist in building and running test cases.
 2. Create a Playwright-based test framework and integrate it with the AI model.
 3. Deploy the system in a CI/CD pipeline for continuous feedback.
@@ -18,18 +19,22 @@ The project will be tested against the **[SauceDemo](https://www.saucedemo.com/)
 ## Objectives
 
 1. **AI Model Integration**:
+
    - Develop or find an AI model to learn from application changes, test cases, and results.
    - Train the AI model to assist in automating test generation and decision-making within the framework.
 
 2. **Test Automation with Playwright**:
+
    - Build a Playwright test framework to automate end-to-end testing.
    - Integrate the AI model to generate, run, and optimize tests dynamically.
 
 3. **CI/CD Deployment**:
+
    - Implement continuous integration and continuous deployment (CI/CD) using tools such as GitHub Actions or Jenkins.
    - Ensure automatic execution of tests on every code push with AI-based feedback on test results and performance.
 
 4. **Optimization**:
+
    - Focus on optimizing test execution time, reducing resource consumption, and improving scalability.
 
 5. **AI vs Traditional Automation**:
@@ -49,26 +54,30 @@ The project will be tested against the **[SauceDemo](https://www.saucedemo.com/)
 - **Node.js**: Ensure you have Node.js installed. You can download it from [here](https://nodejs.org/).
 - **Playwright**: Playwright will be the core automation tool. Install it using:
   ```bash
-  npm install playwright
+  yarn install playwright
   ```
 - **SauceDemo**: The website you will be testing against is [SauceDemo](https://www.saucedemo.com/).
 
 ### Installation
 
 1. Clone the repository:
+
    ```bash
-   git clone https://github.com/yourusername/ai-driven-test-automation.git
-   cd ai-driven-test-automation
+   git clone https://github.com/cornshuckin/etm-676-ai-qa.git
+   cd etm-676-ai-qa
    ```
 
 2. Install the required dependencies:
+
    ```bash
-   npm install
+   yarn install
    ```
 
 3. Train the AI model (Instructions to be provided once the AI model is set up):
+
    ```bash
-   npm run train-ai
+   yarn run ai-suggestions-on-tests
+   yarn run ai-suggestions-past-runs <no of runs>
    ```
 
 4. Set up the CI/CD pipeline (e.g., using GitHub Actions or Jenkins):
@@ -77,19 +86,20 @@ The project will be tested against the **[SauceDemo](https://www.saucedemo.com/)
 ### Running Tests
 
 1. Execute tests using Playwright:
+
    ```bash
-   npx playwright test
+   yarn playwright test
    ```
 
 2. Observe AI-generated insights on the test results:
    ```bash
-   npm run analyze-results
+   yarn run ai-suggestions-past-runs <no of runs>
    ```
 
 ### CI/CD Integration
 
 - The framework can be integrated into CI/CD pipelines using tools like GitHub Actions, CircleCI, or Jenkins. Simply configure the pipeline to trigger Playwright tests on every code commit or pull request.
-  
+
 ### Project Structure
 
 ```bash
