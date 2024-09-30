@@ -1,7 +1,6 @@
 import { expect, test } from "@playwright/test";
 
 import { URL } from "../support";
-import { getOpenAIResponse } from "../../support/openai";
 
 test.describe("Login scenarios", () => {
   test("can login", async ({ page }) => {
@@ -22,8 +21,5 @@ test.describe("Login scenarios", () => {
         "Swag Labs",
       );
     });
-
-    const ai = await getOpenAIResponse("What is the purpose of this test?");
-    console.log(ai);
   });
 });
