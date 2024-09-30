@@ -8,7 +8,7 @@ This project aims to create an AI-driven test automation framework using Playwri
 
 The project will:
 
-1. Find and train an AI model to assist in building and running test cases.
+1. Find and use an AI model to assist in building and running test cases.
 2. Create a Playwright-based test framework and integrate it with the AI model.
 3. Deploy the system in a CI/CD pipeline for continuous feedback.
 4. Optimize test execution time and resource utilization.
@@ -20,7 +20,7 @@ The project will be tested against the **[SauceDemo](https://www.saucedemo.com/)
 
 1. **AI Model Integration**:
 
-   - Develop or find an AI model to learn from application changes, test cases, and results.
+   - Develop or find an AI model to make suggestions from application changes, test cases, and results.
    - Train the AI model to assist in automating test generation and decision-making within the framework.
 
 2. **Test Automation with Playwright**:
