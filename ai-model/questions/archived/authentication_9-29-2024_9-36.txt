@@ -1,3 +1,7 @@
+How can I improve this test? <insert authentication.spec.ts file code>
+
+============================= ↓↓ Answer ↓↓ =============================
+
 Your Playwright test for logging in looks well-structured, but there are areas where it can be improved for clarity, maintainability, and robustness. Here are some suggestions:
 
 1. **Separation of Concerns**: Extract sections of your test into reusable functions. This improves readability and makes it easier to maintain.
@@ -60,3 +64,23 @@ test.describe("Login scenarios", () => {
 - **Constants**: Used constants for username and password to declutter the code.
   
 These changes make your test more maintainable and easier to read while ensuring it remains robust.
+
+============================= ↓↓ My Takeaways ↓↓ =============================
+```1. **Separation of Concerns**: Extract sections of your test into reusable functions. This improves readability and makes it easier to maintain.```
+I do agree with this in a way, but there is no reason to do this if there is only one test. I would also like to see if it were to mention the page object model, a 
+popular pattern used by many QA engineers in across the industry.
+
+```2. **Error Handling and Timeouts**: Consider implementing error handling or increasing timeout settings for actions that take longer than expected. This can spare you from flaky tests.```
+I gave no indication of error handling so I am curious on why it was suggested.
+
+```3. **More Assertions**: Add more assertions to verify the state of the app after login, such as checking the existence of key elements on the page.```
+The test is only logging in, so I think adding more assertions would be over the top.
+
+```4. **Use of Constants**: Store constants like URLs and credentials in separate configuration files to improve security and maintainability.```
+I have already done this, and is a moot point.
+
+```5. **Prioritize Explicit Waits**: Utilize explicit waits for elements that require user interaction or take some time to load.```
+Playwright automatically uses waits, this is not a good suggestion.
+
+```6. **Avoid Hardcoded Credentials**: If possible, use environment variables or a secure method to handle secrets.```
+Another bad suggestion as these are secured. 

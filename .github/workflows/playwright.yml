@@ -15,11 +15,19 @@ jobs:
         with:
           node-version: "21"
 
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: Install dependencies
         run: npm install -g yarn && yarn
 
       - name: Install Playwright Browsers
-        run: yarn playwright install --with-deps
+        run: yarn playwright install --with-deps 
 
       - name: Run Playwright tests
         run: yarn playwright test
