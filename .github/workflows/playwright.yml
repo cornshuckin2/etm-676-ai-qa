@@ -27,10 +27,19 @@ jobs:
         run: npm install -g yarn && yarn
 
       - name: Install Playwright Browsers
-        run: yarn playwright install --with-deps 
+        run: yarn playwright install --with-deps
 
       - name: Run Playwright tests
         run: yarn playwright test
+
+      - name: Annotate with ChatGPT suggestions
+        run: node sendResultsToChatGPT.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CHATGPT_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          CHECK_RUN_ID: ${{ github.run_id }}
+          OWNER: ${{ github.repository_owner }}
+          REPO: ${{ github.event.repository.name }}
 
       - uses: actions/upload-artifact@v4
         if: always()
