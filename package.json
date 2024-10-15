@@ -1,6 +1,7 @@
 {
   "name": "etm-676-ai-qa",
   "license": "none",
+  "type": "module",
   "devDependencies": {
     "@playwright/test": "^1.47.2",
     "@types/node": "^22.5.5",
