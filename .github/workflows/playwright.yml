@@ -33,6 +33,8 @@ jobs:
         run: yarn playwright test
 
       - name: Run script and capture output
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           yarn tsx ai-helper/annotate_results_in_gh.ts > script_output.txt
           output=$(cat script_output.txt)
