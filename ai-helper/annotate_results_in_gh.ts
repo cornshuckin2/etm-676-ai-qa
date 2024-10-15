@@ -24,7 +24,7 @@ async function main() {
 
 async function getTestResults(): Promise<any> {
   try {
-    const data = fs.readFileSync("../test-results.json", "utf-8");
+    const data = fs.readFileSync("test-results.json", "utf-8");
     return JSON.parse(data);
   } catch (error) {
     console.error("Error reading test results file:", error);

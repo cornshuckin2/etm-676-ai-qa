@@ -33,7 +33,7 @@ jobs:
         run: yarn playwright test
 
       - name: Annotate with ChatGPT suggestions
-        run: node ai-helper/annotate_results_in_gh.ts
+        run: yarn tsx ai-helper/annotate_results_in_gh.ts
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CHATGPT_API_KEY: ${{ secrets.OPENAI_API_KEY }}
