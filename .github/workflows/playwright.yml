@@ -3,9 +3,6 @@ on:
   pull_request:
     branches: [main]
 
-permissions:
-  checks: write
-
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -35,14 +32,11 @@ jobs:
       - name: Run Playwright tests
         run: yarn playwright test
 
-      - name: Annotate with ChatGPT suggestions
-        run: yarn tsx ai-helper/annotate_results_in_gh.ts
-        env:
-          CHECK_RUN_ID: ${{ github.run_id }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          OWNER: ${{ github.repository_owner }}
-          REPO: ${{ github.event.repository.name }}
+      - name: Run script and capture output
+        run: |
+          yarn tsx ai-helper/annotate_results_in_gh.ts > script_output.txt
+          output=$(cat script_output.txt)
+          echo "::notice::$output"
 
       - uses: actions/upload-artifact@v4
         if: always()
