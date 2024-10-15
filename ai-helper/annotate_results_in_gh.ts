@@ -11,25 +11,16 @@ const CHECK_RUN_ID = process.env.CHECK_RUN_ID;
 main();
 
 async function main() {
-  try {
-    const testResults = await getTestResults();
-    const suggestions = await getChatGPTSuggestions(testResults);
+  const testResults = await getTestResults();
+  const suggestions = await getChatGPTSuggestions(testResults);
 
-    await annotateGitHubCheck(suggestions);
-    console.log("Successfully annotated GitHub check with ChatGPT suggestions");
-  } catch (error) {
-    console.error("Error occurred:", error);
-  }
+  await annotateGitHubCheck(suggestions);
+  console.log("Successfully annotated GitHub check with ChatGPT suggestions");
 }
 
 async function getTestResults(): Promise<any> {
-  try {
-    const data = fs.readFileSync("test-results.json", "utf-8");
-    return JSON.parse(data);
-  } catch (error) {
-    console.error("Error reading test results file:", error);
-    throw error;
-  }
+  const data = fs.readFileSync("test-results.json", "utf-8");
+  return JSON.parse(data);
 }
 
 async function getChatGPTSuggestions(testResults: any): Promise<string> {
