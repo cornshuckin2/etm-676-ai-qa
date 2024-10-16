@@ -39,10 +39,7 @@ jobs:
         id: "script"
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: |
-          yarn tsx ai-helper/results_suggestions.ts
-          output=$(cat script_output.txt)
-          echo "output=$output" >> $GITHUB_OUTPUT
+        run: yarn tsx ai-helper/results_suggestions.ts
 
       - name: Comment with suggestions on PR
         uses: actions/github-script@v7
@@ -51,12 +48,13 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            const { output } = process.env;
+            const fs = require('fs')
+
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `:robot: Definitely not a bot! Here are some suggestions: \n\n${output}`
+              body: `:robot: Definitely not a bot! Here are some suggestions: \n\n${fs.readFileSync('script_output.txt', 'utf8')}`
             })
 
       - uses: actions/upload-artifact@v4
