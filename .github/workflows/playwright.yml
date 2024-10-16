@@ -3,6 +3,9 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  pull-requests: write
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -27,10 +30,32 @@ jobs:
         run: npm install -g yarn && yarn
 
       - name: Install Playwright Browsers
-        run: yarn playwright install --with-deps 
+        run: yarn playwright install --with-deps chromium
 
       - name: Run Playwright tests
         run: yarn playwright test
+
+      - name: Run script and capture output
+        id: "script"
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: yarn tsx ai-helper/results_suggestions.ts
+
+      - name: Comment with suggestions on PR
+        uses: actions/github-script@v7
+        env:
+          output: ${{ steps.script.outputs.output }}
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const fs = require('fs')
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `:robot: Definitely not a bot! Here are some suggestions: \n\n${fs.readFileSync('script_output.txt', 'utf8')}`
+            })
 
       - uses: actions/upload-artifact@v4
         if: always()
