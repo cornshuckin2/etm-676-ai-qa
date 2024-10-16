@@ -51,11 +51,12 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
+            const { output } = process.env;
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: ':robot: Definitely not a bot! Here are some suggestions: ' + process.env.output
+              body: `:robot: Definitely not a bot! Here are some suggestions: \n\n${output}`
             })
 
       - uses: actions/upload-artifact@v4
