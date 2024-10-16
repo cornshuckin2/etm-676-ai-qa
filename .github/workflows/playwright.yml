@@ -42,7 +42,7 @@ jobs:
         run: |
           yarn tsx ai-helper/results_suggestions.ts
           output=$(cat script_output.txt)
-          echo "output=$(output)" >> $GITHUB_OUTPUT
+          echo "output=$output" >> $GITHUB_OUTPUT
 
       - name: Comment with suggestions on PR
         uses: actions/github-script@v7
