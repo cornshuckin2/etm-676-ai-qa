@@ -1,5 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 
+import { env } from "process";
+
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
@@ -22,7 +24,8 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
-    ["list"], // keep the standard console output
+    [env.CI ? "github" : ""],
+    ["html"],
     ["./playwright/support/reporter.ts"], // save JSON report
   ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */

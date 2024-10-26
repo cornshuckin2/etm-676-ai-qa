@@ -46,7 +46,7 @@ test.describe("Login scenarios", () => {
 
   test(
     "cannot login as a locked out user",
-    { tag: ["@P2", "@ai-generated"] },
+    { tag: ["@P2"] },
     async ({ page }) => {
       await test.step("Navigate to login page", async () => {
         await page.goto(URL);
@@ -69,6 +69,26 @@ test.describe("Login scenarios", () => {
   );
 
   test(
+    "cannot login with empty username",
+    { tag: ["@P2", "@ai-generated"] },
+    async ({ page }) => {
+      await test.step("Navigate to login page", async () => {
+        await page.goto(URL);
+      });
+      await test.step("Fill login form with empty password", async () => {
+        await page.getByTestId("username").fill("");
+        await page.getByTestId("password").fill("bad_password");
+        await page.getByTestId("login-button").click();
+      });
+      await test.step("Verify error message is displayed", async () => {
+        await expect(page.getByTestId("error")).toHaveText(
+          /Username is required/,
+        );
+      });
+    },
+  );
+
+  test(
     "cannot login with empty password",
     { tag: ["@P2", "@ai-generated"] },
     async ({ page }) => {
@@ -76,7 +96,7 @@ test.describe("Login scenarios", () => {
         await page.goto(URL);
       });
       await test.step("Fill login form with empty password", async () => {
-        await page.getByTestId("username").fill("locked_out_user");
+        await page.getByTestId("username").fill("");
         await page.getByTestId("password").fill("");
         await page.getByTestId("login-button").click();
       });
