@@ -96,7 +96,7 @@ test.describe("Login scenarios", () => {
         await page.goto(URL);
       });
       await test.step("Fill login form with empty password", async () => {
-        await page.getByTestId("username").fill("");
+        await page.getByTestId("username").fill("standard_user");
         await page.getByTestId("password").fill("");
         await page.getByTestId("login-button").click();
       });
@@ -117,7 +117,7 @@ test.describe("Login scenarios", () => {
       });
       await test.step("Fill login form with invalid password", async () => {
         await page.getByTestId("username").fill("standard_user");
-        await page.getByTestId("password").fill("badd_password");
+        await page.getByTestId("password").fill("bad_password");
         await page.getByTestId("login-button").click();
       });
       await test.step("Verify error message is displayed", async () => {

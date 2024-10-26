@@ -14,3 +14,8 @@ This file provides information on the results of the AI generated suggestions
 - All suggested tests failed due to using the wrong locators.
 - The suggestions were ok, but one test is not valid. Also, why didn't we get all of these suggestions on the first run?
 - The suggestion on priority seemed a bit off. Error messages are important but not critical (P1).
+
+Second Run
+
+- It gave suggestions for new test cases, but those test cases already existed.
+- Updating to a stronger model 4o-mini to 4o
