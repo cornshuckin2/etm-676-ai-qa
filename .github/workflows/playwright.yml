@@ -36,12 +36,14 @@ jobs:
         run: yarn playwright test
 
       - name: Run script and capture output
+        if: always()
         id: "script"
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: yarn tsx ai-helper/results_suggestions.ts
 
       - name: Comment with suggestions on PR
+        if: always()
         uses: actions/github-script@v7
         env:
           output: ${{ steps.script.outputs.output }}
