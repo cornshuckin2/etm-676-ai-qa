@@ -63,16 +63,21 @@ jobs:
                 fileContents += `\n\nFile: ${file.filename}\n\n${decodedContent}`;
               }
             }
-            return {
-              description: pr.body,
-              files: fileContents
-            };
+
+            // Set outputs explicitly
+            core.setOutput("description", pr.body || "");
+            core.setOutput("files", fileContents || "");
 
       - name: Run summarization script
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           yarn tsx ai-helper/results_suggestions.ts "${{ steps.extract.outputs.description }}" "${{ steps.extract.outputs.files }}"
+
+      - name: Debug Extracted Outputs
+        run: |
+          echo "Description: ${{ steps.extract.outputs.description }}"
+          echo "Files: ${{ steps.extract.outputs.files }}"
 
       - name: Update PR description with summary
         uses: actions/github-script@v7
