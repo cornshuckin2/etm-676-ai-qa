@@ -35,29 +35,58 @@ jobs:
       - name: Run Playwright tests
         run: yarn playwright test
 
-      - name: Run script and capture output
-        if: always()
-        id: "script"
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: yarn tsx ai-helper/results_suggestions.ts
-
-      - name: Comment with suggestions on PR
-        if: always()
+      - name: Extract PR details and file contents
+        id: extract
         uses: actions/github-script@v7
         env:
-          output: ${{ steps.script.outputs.output }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            const fs = require('fs')
-
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
+            const { data: pr } = await github.rest.pulls.get({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `:robot: Definitely not a bot! Here are some suggestions: \n\n${fs.readFileSync('script_output.txt', 'utf8')}`
-            })
+              pull_number: context.issue.number,
+            });
+            const files = await github.rest.pulls.listFiles({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+            });
+
+            let fileContents = "";
+            for (const file of files.data) {
+              if (file.status === "modified" || file.status === "added") {
+                const content = await github.request(file.contents_url, {
+                  headers: { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` },
+                });
+                const decodedContent = Buffer.from(content.data.content, 'base64').toString('utf-8');
+                fileContents += `\n\nFile: ${file.filename}\n\n${decodedContent}`;
+              }
+            }
+            return {
+              description: pr.body,
+              files: fileContents
+            };
+
+      - name: Run summarization script
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          node path/to/your-script.js "${{ steps.extract.outputs.description }}" "${{ steps.extract.outputs.files }}"
+
+      - name: Update PR description with summary
+        uses: actions/github-script@v7
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          script: |
+            const summary = process.env.summary;
+            github.rest.pulls.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+              body: `**AI-Generated Summary:**\n\n${summary}\n\n---\n\n${context.payload.pull_request.body}`
+            });
 
       - uses: actions/upload-artifact@v4
         if: always()
