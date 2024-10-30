@@ -13,6 +13,9 @@ const OPEN_AI_DESIRED_OUTPUT_FORMAT = [
 ].join("\n");
 
 async function main(prDescription: string, fileContents: string) {
+  console.log("Received Description:", process.argv[2]);
+  console.log("Received Files:", process.argv[3]);
+
   const combinedInput = `${prDescription}\n\n${fileContents}`;
   const suggestions = await getChatGPTSuggestions(
     OPEN_AI_DESIRED_OUTPUT_FORMAT + "\n" + combinedInput,

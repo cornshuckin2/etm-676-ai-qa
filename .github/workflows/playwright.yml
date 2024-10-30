@@ -64,9 +64,16 @@ jobs:
               }
             }
 
-            // Set outputs explicitly
+            console.log("Description:", pr.body || "");
+            console.log("Files:", fileContents || "");
+
             core.setOutput("description", pr.body || "");
             core.setOutput("files", fileContents || "");
+
+      - name: Debug Extracted Outputs
+        run: |
+          echo "Extracted Description: ${{ steps.extract.outputs.description }}"
+          echo "Extracted Files: ${{ steps.extract.outputs.files }}"
 
       - name: Run summarization script
         env:
