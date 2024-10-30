@@ -72,7 +72,9 @@ jobs:
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
-          yarn tsx ai-helper/results_suggestions.ts "${{ steps.extract.outputs.description }}" "${{ steps.extract.outputs.files }}"
+          description="${{ steps.extract.outputs.description }}"
+          files="${{ steps.extract.outputs.files }}"
+          yarn tsx ai-helper/results_suggestions.ts "$description" "$files"
 
       - name: Debug Extracted Outputs
         run: |
