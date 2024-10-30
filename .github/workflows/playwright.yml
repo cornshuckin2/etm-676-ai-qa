@@ -71,15 +71,10 @@ jobs:
       - name: Run summarization script
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          DESCRIPTION: "${{ steps.extract.outputs.description }}"
+          FILES: "${{ steps.extract.outputs.files }}"
         run: |
-          description="${{ steps.extract.outputs.description }}"
-          files="${{ steps.extract.outputs.files }}"
-          yarn tsx ai-helper/results_suggestions.ts "$description" "$files"
-
-      - name: Debug Extracted Outputs
-        run: |
-          echo "Description: ${{ steps.extract.outputs.description }}"
-          echo "Files: ${{ steps.extract.outputs.files }}"
+          yarn tsx ai-helper/results_suggestions.ts "$DESCRIPTION" "$FILES"
 
       - name: Update PR description with summary
         uses: actions/github-script@v7
