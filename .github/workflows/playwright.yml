@@ -66,22 +66,7 @@ jobs:
 
             const currentBody = pullRequest.body || '';
             const startMarker = ':robot: Definitely not a bot! Here are some suggestions:';
-            const endMarker = '\n\n'; 
-
-            const suggestionStart = currentBody.indexOf(startMarker);
-            let updatedBody;
-
-            if (suggestionStart !== -1) {
-              const suggestionEnd = currentBody.indexOf(endMarker, suggestionStart + startMarker.length);
-              const beforeSuggestion = currentBody.slice(0, suggestionStart);
-              const afterSuggestion = suggestionEnd !== -1 
-                ? currentBody.slice(suggestionEnd).trimStart()
-                : '';
-
-              updatedBody = `${beforeSuggestion.trim()}\n\n${startMarker}\n\n${suggestions}\n\n${afterSuggestion}`.trim();
-            } else {
-              updatedBody = `${currentBody.trim()}\n\n${startMarker}\n\n${suggestions}`.trim();
-            }
+            const newBody = currentBody.substring(0, currentBody.indexOf(startMarker)) + suggestions;
 
             await github.rest.pulls.update({
               owner: context.repo.owner,
