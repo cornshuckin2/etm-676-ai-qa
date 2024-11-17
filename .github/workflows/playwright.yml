@@ -27,7 +27,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Install dependencies
-        run: yarn install -g yarn && yarn
+        run: yarn global add yarn && yarn
 
       - name: Install Playwright Browsers
         run: yarn playwright install --with-deps chromium
