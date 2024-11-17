@@ -23,6 +23,32 @@ test.describe("Login scenarios", () => {
     });
   });
 
+  test("can logout", { tag: "@P1" }, async ({ page }) => {
+    await test.step("Navigate to login page", async () => {
+      await page.goto(URL);
+      await expect(page).toHaveTitle(/Swag Labs/);
+    });
+
+    await test.step("Fill in login form", async () => {
+      await page.getByTestId("username").fill("standard_user");
+      await page.getByTestId("password").fill("secret_sauce");
+      await page.getByTestId("login-button").click();
+    });
+
+    await test.step("Verify successful login", async () => {
+      await expect(page).toHaveURL(URL + "inventory.html");
+      await expect(page.getByTestId("primary-header")).toContainText(
+        "Swag Labs",
+      );
+    });
+
+    await test.step("Logout", async () => {
+      await page.getByRole("button", { name: "Open Menu" }).click();
+      await page.getByTestId("logout-sidebar-link").click();
+      await expect(page.getByTestId("username")).toBeVisible();
+    });
+  });
+
   test(
     "cannot login with invalid username",
     { tag: ["@P1", "@ai-generated"] },
