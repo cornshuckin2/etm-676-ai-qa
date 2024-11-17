@@ -42,7 +42,7 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: yarn tsx ai-helper/results_suggestions.ts
 
-      - name: Append suggestions to PR description
+      - name: Append or replace PR description suggestion section
         if: always()
         uses: actions/github-script@v7
         env:
@@ -58,14 +58,36 @@ jobs:
               pull_number: context.issue.number,
             });
 
+            const suggestions = fs.readFileSync('script_output.txt', 'utf8').trim();
+
+            if (!suggestions) {
+              throw new Error("No suggestions found in 'script_output.txt'.");
+            }
+
             const currentBody = pullRequest.body || '';
-            const suggestions = fs.readFileSync('script_output.txt', 'utf8');
+            const startMarker = ':robot: Definitely not a bot! Here are some suggestions:';
+            const endMarker = '\n\n'; 
+
+            const suggestionStart = currentBody.indexOf(startMarker);
+            let updatedBody;
+
+            if (suggestionStart !== -1) {
+              const suggestionEnd = currentBody.indexOf(endMarker, suggestionStart + startMarker.length);
+              const beforeSuggestion = currentBody.slice(0, suggestionStart);
+              const afterSuggestion = suggestionEnd !== -1 
+                ? currentBody.slice(suggestionEnd).trimStart()
+                : '';
+
+              updatedBody = `${beforeSuggestion.trim()}\n\n${startMarker}\n\n${suggestions}\n\n${afterSuggestion}`.trim();
+            } else {
+              updatedBody = `${currentBody.trim()}\n\n${startMarker}\n\n${suggestions}`.trim();
+            }
 
             await github.rest.pulls.update({
               owner: context.repo.owner,
               repo: context.repo.repo,
               pull_number: context.issue.number,
-              body: `${currentBody}\n\n:robot: Definitely not a bot! Here are some suggestions:\n\n${suggestions}`,
+              body: updatedBody,
             });
 
       - uses: actions/upload-artifact@v4
