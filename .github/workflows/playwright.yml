@@ -13,6 +13,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-node@v4
         with:
@@ -33,7 +35,7 @@ jobs:
         run: yarn playwright install --with-deps chromium
 
       - name: Run Playwright tests
-        run: yarn playwright test
+        run: yarn playwright test --only-changed=origin/main
 
       - name: Run script and capture output
         if: always()
