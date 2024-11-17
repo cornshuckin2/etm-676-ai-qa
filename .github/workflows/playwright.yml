@@ -33,7 +33,7 @@ jobs:
         run: yarn playwright install --with-deps chromium
 
       - name: Run Playwright tests
-        run: yarn playwright test --only-changed
+        run: yarn playwright test --only-changed=main
 
       - name: Run script and capture output
         if: always()
