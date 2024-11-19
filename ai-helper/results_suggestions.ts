@@ -1,5 +1,6 @@
 import * as fs from "fs";
 
+import { exit } from "process";
 import { getOpenAIResponse } from "../support/openai";
 
 const OPEN_AI_DESIRED_OUTPUT_FORMAT = [
@@ -15,12 +16,12 @@ main();
 
 async function main() {
   const testResults = await getTestResults();
-  if (!testResults || testResults.length === 0) {
+  if (!testResults?.results || testResults?.results.length === 0) {
     fs.writeFileSync(
       "script_output.txt",
       "Summary unavailable, no test results found",
     );
-    return;
+    exit(0);
   }
   const suggestions = await getChatGPTSuggestions(
     OPEN_AI_DESIRED_OUTPUT_FORMAT + "\n" + JSON.stringify(testResults),
