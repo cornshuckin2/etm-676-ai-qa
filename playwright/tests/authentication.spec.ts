@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 import { URL } from "../support";
 
 test.describe("Login scenarios", () => {
-  test("can login", { tag: "@P2" }, async ({ page }) => {
+  test("can login", { tag: "@P1" }, async ({ page }) => {
     await test.step("Navigate to login page", async () => {
       await page.goto(URL);
       await expect(page).toHaveTitle(/Swag Labs/);
