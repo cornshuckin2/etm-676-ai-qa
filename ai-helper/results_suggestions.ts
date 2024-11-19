@@ -8,6 +8,7 @@ const OPEN_AI_DESIRED_OUTPUT_FORMAT = [
   '- (list of code blocks) Give suggestions on missing test cases and their priority for the suites. If you believe there are any missing tests, provide a typescript playwright test block (with priority tag) using psuedo code that can be used to write the test see example: test("cannot login as a locked out user", { tag: "@P1" }, async ({ page }) => { await test.step("Navigate to login page", async () => { await page.goto(URL); await expect(page).toHaveTitle(/Swag Labs/); }); });',
   "- (list) Give suggestions on the given results and their priorities (P1 for high priority, P2 for medium priority, P3 for low priority)",
   "- (list) Give suggestions on the given timing of the test cases for the suites",
+  "- (list) Determine if any area would be prone to defects.",
   "- (summary) Provide a summary of all of the above, including any recommendations.",
 ].join("\n");
 main();
