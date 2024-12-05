@@ -4,14 +4,16 @@ import { exit } from "process";
 import { getOpenAIResponse } from "../support/openai";
 
 const OPEN_AI_DESIRED_OUTPUT_FORMAT = [
-  "Please format the output into a nicely readable format.",
-  "- (table) Suite, Test Case, Priority, Timing, Result",
-  '- (list of code blocks) Give suggestions on missing test cases and their priority for the suites. If you believe there are any missing tests, provide a typescript playwright test block (with priority tag) using psuedo code that can be used to write the test see example: test("cannot login as a locked out user", { tag: "@P1" }, async ({ page }) => { await test.step("Navigate to login page", async () => { await page.goto(URL); await expect(page).toHaveTitle(/Swag Labs/); }); });',
-  "- (list) Give suggestions on the given results and their priorities (P1 for high priority, P2 for medium priority, P3 for low priority)",
-  "- (list) Give suggestions on the given timing of the test cases for the suites",
-  "- (list) Determine if any area would be prone to defects.",
-  "- (summary) Provide a summary of all of the above, including any recommendations.",
+  "Analyze the provided test results and offer actionable suggestions for improving the test suite.",
+  "- (table) Format the results in a table with the columns: Suite, Test Case, Priority (P1, P2, P3), Timing (execution time in seconds), and Result (Pass/Fail).",
+  '- (list of code blocks) Identify any missing test cases and provide a TypeScript Playwright test block (with a priority tag) in pseudocode for each missing case. For example: test("cannot login as a locked-out user", { tag: "@P1" }, async ({ page }) => { await test.step("Navigate to login page", async () => { await page.goto(URL); await expect(page).toHaveTitle(/Swag Labs/); }); });',
+  "- (list) Suggest improvements or optimizations to the existing test cases based on the results, including re-prioritization (P1 for high priority, P2 for medium priority, P3 for low priority).",
+  "- (list) Provide recommendations for optimizing test execution timings. Highlight tests with unusually long durations and suggest potential reasons and fixes (e.g., optimizing selectors, network mocking).",
+  "- (list) Identify areas or functionalities that might be prone to defects based on failed or flaky tests and suggest additional test coverage or improvements.",
+  "- (summary) Summarize all findings, including recommendations for missing test cases, timing optimizations, and strategies for improving test stability and coverage.",
+  "- (optional next steps) Provide a checklist of actionable next steps to implement the recommendations.",
 ].join("\n");
+
 main();
 
 async function main() {
