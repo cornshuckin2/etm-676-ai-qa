@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 import { URL } from "../support";
 
 test.describe("Login scenarios", () => {
-  test.beforeEach((_, testInfo) => {
+  test.beforeEach(async ({}, testInfo) => {
     testInfo.annotations.push(
       {
         type: "Feature Description",
