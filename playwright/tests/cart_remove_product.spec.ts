@@ -37,9 +37,6 @@ test.describe("Remove product from cart", () => {
 
       await test.step("Add and remove from cart from home page", async () => {
         const product = sample(await page.getByTestId("inventory-item").all());
-        const productName = await product
-          .getByTestId("inventory-item-name")
-          .textContent();
 
         await product.getByRole("button", { name: "Add to cart" }).click();
         await expect(page.getByTestId("shopping-cart-badge")).toHaveText("1");
