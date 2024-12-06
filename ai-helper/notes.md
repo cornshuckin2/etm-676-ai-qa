@@ -30,3 +30,12 @@ Second Run
 - Missing test cases did not provide any helpful insight
 - It suggested p3, which I agree with as they are not critical
 - Noted that login is taking long, which is a good suggestion for improvements
+
+- The second request after making chnages told me to change it back to p2
+- Made a good suggestion on removing duplication
+- Inaccurately suggesting a test case for login for just filter tests
+
+# https://github.com/cornshuckin2/etm-676-ai-qa/pull/12
+
+- I left in some notes from a copy / paste error, Instead of calling out any problems it noted that the filter tests may be prone to defects when the test suite was for removing product from cart.
+-
