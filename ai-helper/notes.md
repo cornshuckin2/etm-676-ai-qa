@@ -130,6 +130,10 @@ Suggested additional coverage for areas prone to issues such as session manageme
 - gave suggestion of test case I just wrote
 - suggested to change for p1 but not needed
 
+After second commit
+
+- suggested a few test cases that could be useful, such as responsiveness and cart persistence
+
 GIVEN SUMMARY BY AI
 Missing Test Cases:
 
