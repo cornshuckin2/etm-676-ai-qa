@@ -30,3 +30,7 @@ Second Run
 - Missing test cases did not provide any helpful insight
 - It suggested p3, which I agree with as they are not critical
 - Noted that login is taking long, which is a good suggestion for improvements
+
+- The second request after making chnages told me to change it back to p2
+- Made a good suggestion on removing duplication
+- Inaccurately suggesting a test case for login for just filter tests
