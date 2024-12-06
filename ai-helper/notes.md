@@ -105,7 +105,15 @@ Bolstering our test suite to cover potential flaky behaviors.
 
 # https://github.com/cornshuckin2/etm-676-ai-qa/pull/13
 
+- missing test cases provide value about thinking of what could be missing but does not give useful test code
+- Upgrading from p3 to p2 was a good suggestion
+- suggested to run tests in parallel. only 1 test was in the suite but still a good suggestion for larger suites
+
 GIVEN SUMMARY BY AI
+Introduced missing test cases for rendering and navigation via the burger menu to ensure comprehensive coverage.
+Suggested re-prioritizing a critical navigation test from P3 to P2.
+Recommended investigating steps with long timings to improve execution efficiency.
+Highlighted the need for increased test coverage around core navigation to ensure robustness.
 
 # https://github.com/cornshuckin2/etm-676-ai-qa/pull/14
 

@@ -19,7 +19,7 @@ test.describe("Burger menu", () => {
 
   test(
     "user can open and close the burger menu",
-    { tag: "@P3" },
+    { tag: "@P2" },
     async ({ page }) => {
       await test.step("Navigate to login page and login", async () => {
         await page.goto(URL);
