@@ -127,4 +127,17 @@ Suggested additional coverage for areas prone to issues such as session manageme
 
 # https://github.com/cornshuckin2/etm-676-ai-qa/pull/15
 
+- gave suggestion of test case I just wrote
+- suggested to change for p1 but not needed
+
 GIVEN SUMMARY BY AI
+Missing Test Cases:
+
+Add tests to verify functional outcomes such as cart content after application state resets.
+Timing Optimizations:
+
+Speed up login processing by switching to API-based authentication setup.
+Analyze and resolve extended time for steps like closing the burger menu.
+Stability Improvements:
+
+Investigate long durations in seemingly simple operations to preemptively address flakiness.
