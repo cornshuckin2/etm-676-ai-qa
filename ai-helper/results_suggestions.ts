@@ -5,6 +5,7 @@ import { getOpenAIResponse } from "../support/openai";
 
 const OPEN_AI_DESIRED_OUTPUT_FORMAT = [
   "Analyze the provided test results and offer actionable suggestions for improving the test suite.",
+  "If there are no suggestions, provide a short summary for each section.",
   "- (table) Format the results in a table with the columns: Suite, Test Case, Priority (P1, P2, P3), Timing (execution time in seconds), and Result (Pass/Fail).",
   '- (list of code blocks) Identify any missing test cases and provide a TypeScript Playwright test block (with a priority tag) in pseudocode for each missing case. For example: test("cannot login as a locked-out user", { tag: "@P1" }, async ({ page }) => { await test.step("Navigate to login page", async () => { await page.goto(URL); await expect(page).toHaveTitle(/Swag Labs/); }); });',
   "- (list) Suggest improvements or optimizations to the existing test cases based on the results, including re-prioritization (P1 for high priority, P2 for medium priority, P3 for low priority).",
