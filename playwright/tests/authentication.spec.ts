@@ -169,6 +169,21 @@ test.describe("Login scenarios", () => {
   );
 
   test(
+    "cannot access cart page without logging in",
+    { tag: ["@P2"] },
+    async ({ page }) => {
+      await test.step("Navigate to login page", async () => {
+        await page.goto(URL + "cart.html");
+      });
+      await test.step("Verify error message is displayed", async () => {
+        await expect(page.getByTestId("error")).toContainText(
+          "Epic sadface: You can only access '/cart.html' when you are logged in.",
+        );
+      });
+    },
+  );
+
+  test(
     "valid session persists after page reload",
     { tag: ["@P3", "@ai-generated"] },
     async ({ page }) => {
