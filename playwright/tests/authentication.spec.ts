@@ -3,6 +3,20 @@ import { expect, test } from "@playwright/test";
 import { URL } from "../support";
 
 test.describe("Login scenarios", () => {
+  test.beforeEach(async ({}, testInfo) => {
+    testInfo.annotations.push(
+      {
+        type: "Feature Description",
+        description: "Login scenarios for the Swag Labs website",
+      },
+      {
+        type: "Feature Requirements",
+        description:
+          "User should be able to login, logout and persist sessions. Invalid user credentials should not be able to login.",
+      },
+    );
+  });
+
   test("can login", { tag: "@P1" }, async ({ page }) => {
     await test.step("Navigate to login page", async () => {
       await page.goto(URL);

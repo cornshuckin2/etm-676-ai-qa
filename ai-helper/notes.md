@@ -19,3 +19,8 @@ Second Run
 
 - It gave suggestions for new test cases, but those test cases already existed.
 - Updating to a stronger model 4o-mini to 4o
+
+# https://github.com/cornshuckin2/etm-676-ai-qa/pull/8
+
+- Missing test cases were not helpful, since it is an e2e
+- It did mention that the test case was well put together and part of a crucial workflow

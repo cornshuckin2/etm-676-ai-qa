@@ -15,6 +15,7 @@ interface TestDetails {
   steps: TestStep[];
   result: string;
   totalTime: number;
+  requirements: string;
 }
 
 class CustomJsonReporter implements Reporter {
@@ -41,6 +42,9 @@ class CustomJsonReporter implements Reporter {
       steps: steps,
       result: result.status,
       totalTime: result.duration,
+      requirements: (test.annotations.map((a) => a.description) || [""]).join(
+        "\n",
+      ),
     };
 
     this.testResults.push(testDetails);
