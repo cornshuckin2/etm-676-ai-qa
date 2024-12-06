@@ -18,7 +18,7 @@ test.describe("Filter products", () => {
   });
 
   for (const filter of ["Name (A to Z)", "Name (Z to A)"]) {
-    test(`can filter by ${filter}`, { tag: "@P2" }, async ({ page }) => {
+    test(`can filter by ${filter}`, { tag: "@P3" }, async ({ page }) => {
       await test.step("Navigate to login page and login", async () => {
         await page.goto(URL);
         await expect(page).toHaveTitle(/Swag Labs/);
@@ -51,7 +51,7 @@ test.describe("Filter products", () => {
   }
 
   for (const filter of ["Price (low to high)", "Price (high to low)"]) {
-    test(`can filter by ${filter}`, { tag: "@P2" }, async ({ page }) => {
+    test(`can filter by ${filter}`, { tag: "@P3" }, async ({ page }) => {
       await test.step("Navigate to login page and login", async () => {
         await page.goto(URL);
         await expect(page).toHaveTitle(/Swag Labs/);

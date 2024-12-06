@@ -24,3 +24,9 @@ Second Run
 
 - Missing test cases were not helpful, since it is an e2e
 - It did mention that the test case was well put together and part of a crucial workflow
+
+# https://github.com/cornshuckin2/etm-676-ai-qa/pull/11
+
+- Missing test cases did not provide any helpful insight
+- It suggested p3, which I agree with as they are not critical
+- Noted that login is taking long, which is a good suggestion for improvements
