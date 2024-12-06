@@ -8,12 +8,12 @@ test.describe("Remove product from cart", () => {
     testInfo.annotations.push(
       {
         type: "Feature Description",
-        description: "Filter scenarios for the Swag Labs website",
+        description: "Remove products from cart on the home page and cart page",
       },
       {
         type: "Feature Requirements",
         description:
-          "User can filter by Name (A to Z), Name (Z to A), Price (low to high), and Price (high to low).",
+          "User can remove a product from their cart on the home page and cart page.",
       },
     );
   });
